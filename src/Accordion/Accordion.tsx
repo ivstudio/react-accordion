@@ -22,7 +22,7 @@ const Accordion = ({ children, expanded = "", onChange }: IAccordion): any => {
         const isExpanded = expanded === id;
         const panelToggle = React.cloneElement(children[0], {
           toggle: (id: string) => onChange(id),
-          isExpanded: id
+          isExpanded
         });
 
         return (
