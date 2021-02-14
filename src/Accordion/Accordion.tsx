@@ -18,18 +18,20 @@ const Accordion = ({ children, expanded = "", onChange }: IAccordion): any => {
   return (
     <Container>
       {React.Children.map(children, ({ props: { children } }) => {
-        const { id } = children[0].props;
-        const isExpanded = expanded === id;
-        const panelToggle = React.cloneElement(children[0], {
+        const toggleElem = children[0];
+        const collapseElem = children[1];
+
+        const isExpanded = expanded === toggleElem.props.id;
+        const toggleElemCloned = React.cloneElement(toggleElem, {
           toggle: (id: string) => onChange(id),
           isExpanded
         });
 
         return (
           <AccordionItem>
-            {panelToggle}
+            {toggleElemCloned}
             <AnimatePresence initial={false}>
-              {isExpanded && children[1]}
+              {isExpanded && collapseElem}
             </AnimatePresence>
           </AccordionItem>
         );
